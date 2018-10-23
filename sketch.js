@@ -57,17 +57,35 @@ function drawResultRow(i, bgX, bgY){
   // textAlign(RIGHT, CENTER);  
   // text(colTotalPercent+"%", windowWidth/2.5-50, rowY+rowHeight/2);
 
-  //local percentage
-  var colLocalPercent = int(colChunks*100/totalChunks);
-  textAlign(RIGHT, CENTER);  
-  text(colLocalPercent+"%", windowWidth/2-50, rowY+rowHeight/2);
+  if(docArray[i].state == 2){ // if doc is processed
+    //local percentage
+    var colLocalPercent = int(colChunks*100/totalChunks);
+    textAlign(RIGHT, CENTER);  
+    text(colLocalPercent+"%", windowWidth/2-50, rowY+rowHeight/2);
 
-  drawBar(windowWidth/2, rowY+rowHeight/4, (windowWidth/2)-40, rowHeight/2, totalChunks, colChunks);
-  fill(255);
-  textAlign(CENTER, CENTER);  
-  text(colChunks+"/"+totalChunks, (windowWidth*3/4)-40, rowY+rowHeight/2);
-  console.log(docName+" Local ColDict: ");
-  console.log(docArray[i].collisionDict);
+    drawBar(windowWidth/2, rowY+rowHeight/4, (windowWidth/2)-40, rowHeight/2, totalChunks, colChunks);
+    fill(255);
+    textAlign(CENTER, CENTER);  
+    text(colChunks+"/"+totalChunks, (windowWidth*3/4)-40, rowY+rowHeight/2);
+    console.log(docName+" Local ColDict: ");
+    console.log(docArray[i].collisionDict);
+  }else{
+    //local percentage
+ 
+    textAlign(RIGHT, CENTER);  
+    text(" - ", windowWidth/2-50, rowY+rowHeight/2);
+    
+    fill(0);
+    textAlign(CENTER, CENTER);  
+
+    if(docArray[i].state == 0){ 
+      text("Uploading...", (windowWidth*3/4)-40, rowY+rowHeight/2);
+    }
+    if(docArray[i].state == 1){ 
+      text("Parsing...", (windowWidth*3/4)-40, rowY+rowHeight/2);
+    }
+
+  }
 }
 
 
@@ -93,9 +111,7 @@ function draw() {
      rect(bgX, bgY, windowWidth-40, windowHeight-110);
 
     for(var i = 0; i < docArray.length; i++){  
-      if(docArray[i].state == 2){ // if doc is processed
-        drawResultRow(i, bgX, bgY);
-      }      
+      drawResultRow(i, bgX, bgY);      
     }
 
     drawHTML();
