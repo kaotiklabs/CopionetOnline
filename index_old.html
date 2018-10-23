@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+    <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+    <style> body {padding: 0; margin: 0;} </style>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>COPIONET - The Free Document Fraud Detector</title>
+
+ 
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Plugin CSS -->
+    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <!-- <link href="css/freelancer.min.css" rel="stylesheet"> -->
+    <link href="css/freelancer.css" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+          
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
+      
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">COPIONET</a>
+        <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">About</a>
+            </li>
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#features">Features</a>
+            </li>   
+            <li class="nav-item mx-0 mx-lg-1">
+                <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#screenshots">Screenshots</a>
+            </li>
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#downloads">Downloads</a>
+            </li>                                    
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+    <!-- Header -->
+    <header class="masthead bg-primary text-blue text-center">
+
+        <div id="sketchholder">
+            <!-- Our sketch will go here! -->    
+        </div>
+
+        <script type="text/javascript">  
+
+          // var sketch = document.getElementById("sketchholder").value;
+          // var canvas = sketch.getElementById("canvas");
+          var canvas = document.getElementById("defaultCanvas0");
+          //var context = canvas.getContext("2d");
+          console.log("out: "+canvas);            
+        </script>
+
+
+    <!-- About Section -->
+    <section class="portfolio" id="about">
+      <div class="container">
+        <div class="alert alert-primary" role="alert">
+            <p>The value for number is: <span id="myText"></span></p>
+        </div>
+      </div>
+    </section>
+
+      <div class="container">
+        <img class="img-fluid mb-5 d-block mx-auto" src="img/copionet.png" alt="">
+        <h1 class="text-uppercase mb-0" style="color: #0088ff;">COPIONET</h1>        
+        <h2 class="font-weight-light mb-0" style="color:#024d72">The Free Document Fraud Detector</h2>                
+      </div>   
+    </header>
+
+    <!-- About Section -->
+    <section class="portfolio" id="about">
+      <div class="container">
+        <h2 class="text-center text-uppercase text-black">About</h2>
+        </br>
+        <div class="row">
+          <div class="col-lg-4 ml-auto">
+            <p class="lead">Copionet is a <b>free plagiarism detector tool</b> initially created to help teachers to review the student's work. It supports the main doc file types: DOCX, ODT, TXT, PDF and much more!</p>
+          </div>
+          <div class="col-lg-4 mr-auto">
+            <p class="lead">This tool is developed by Jaume Mayor (IT Professor) after a long and arduous search without success for a convenient tool for quick <b>student's assignments revision</b>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="copyright py-4 text-center text-white">
+      <div class="container">
+        <small>Copyright &copy; COPIONET 2018</small>
+      </div>
+    </div>
+
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-to-top d-lg-none position-fixed ">
+      <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top">
+        <i class="fa fa-chevron-up"></i>
+      </a>
+    </div>
+
+    <!-- P5js  JavaScript -->
+    <script src="./libs/p5.min.js"></script>
+    <script src="./addons/p5.dom.min.js"></script>
+
+    <script src="sketch.js"></script>
+    <script src="filehelper.js"></script>    
+    <script src="texthelper.js"></script>  
+    <script src="documentClass.js"></script>  
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/freelancer.min.js"></script>
+
+ 
+
+  </body>
+
+</html>

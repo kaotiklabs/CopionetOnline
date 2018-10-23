@@ -1,0 +1,9 @@
+TODO
+====
+
+- filtrar documents per extensió (invalids, no procesar)
+- meter filearray en docArray (variable file)
+- mostrar documentos subiendo o procesando...
+- no mostrar datos significativos hasta que todos esten procesados
+- usar tika/form o tika/form/main ??
+- sanitize text
