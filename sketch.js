@@ -6,6 +6,8 @@ var collisionGlobalDict = {};
 
 var myFont, icon;
 
+
+
 function preload() {
   myFont = loadFont('assets/AvenirNextLTPro-Demi.otf');
   icon = loadImage('assets/copionet.png');
@@ -56,7 +58,7 @@ function drawResultRow(i, bgX, bgY){
   // textAlign(RIGHT, CENTER);  
   // text(colTotalPercent+"%", windowWidth/2.5-50, rowY+rowHeight/2);
 
-  if(docArray[i].state == 2){ // if doc is processed
+  if(docArray[i].state == DocState.PROCESSED){ // if doc is processed
     //local percentage
     var colLocalPercent = int(colChunks*100/totalChunks);
     textAlign(RIGHT, CENTER);  
@@ -79,11 +81,14 @@ function drawResultRow(i, bgX, bgY){
     fill(0);
     textAlign(CENTER, CENTER);  
 
-    if(docArray[i].state == 0){ 
+    if(docArray[i].state == DocState.UPLOADING){ 
       text("Uploading...", (windowWidth*3/4)-40, rowY+rowHeight/2);
     }
-    if(docArray[i].state == 1){ 
+    if(docArray[i].state == DocState.PARSING){ 
       text("Parsing...", (windowWidth*3/4)-40, rowY+rowHeight/2);
+    }
+    if(docArray[i].state == DocState.PROCESSING){ 
+      text("Processing...", (windowWidth*3/4)-40, rowY+rowHeight/2);
     }
 
   }
@@ -103,6 +108,11 @@ function draw() {
   textAlign(LEFT, TOP);
   text("COPIONET -   Online Document Fraud Detector", 90, 35);  
   image(icon, 20, 20, 60, 60);
+  textSize(14);
+  fill(0);
+  text("ver 0.2", 230, 70);  
+  textSize(36);
+
 
   if(docArray.length){
     textAlign(LEFT);    

@@ -1,3 +1,12 @@
+
+var DocState = {
+  INITIAL: 0,
+  UPLOADING: 1,
+  PARSING: 2,
+  PROCESSING: 3,
+  PROCESSED: 4,
+};
+
 // Document class
 function DocumentClass(file) {
 
@@ -6,7 +15,7 @@ function DocumentClass(file) {
   this.file=file;
   
   this.name=this.file.name;
-  this.state = 0; // 0:initial, 1:uploaded, 2:procesed
+  this.state = DocState.INITIAL;
 
   this.rawText;
   this.cleanText;

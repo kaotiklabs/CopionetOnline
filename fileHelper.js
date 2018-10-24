@@ -40,6 +40,8 @@ function extractRawText(doc){
   var formData = new FormData();
   formData.append(doc.name, doc.file.file);
   console.log("Uploading "+doc.name+" to parser");
+  doc.state = DocState.UPLOADING;
+  redraw();
 
     $.ajax({
       url: url,
@@ -52,8 +54,6 @@ function extractRawText(doc){
       success: function(data, textStatus, jqXHR) {
         console.log("rawText: "+data); 
         doc.rawText = data;    
-        doc.state = 1; //uploaded  
-        //redraw();
         analyzeText(doc); 
       }
     });
@@ -77,6 +77,9 @@ function extractRawText(doc){
 
 function analyzeText(doc){
  
+  doc.state = DocState.PARSING;
+  redraw();
+
   //remove accentuation and diacritics
   var noAccentText = doc.rawText.normalize('NFD').replace(/[\u0300-\u036f]/g, "")
   console.log("noAccentText: "+noAccentText);
@@ -100,8 +103,13 @@ function analyzeText(doc){
   var arrayNgrams = nGrams(wordsArray, 5);
   console.log("arrayNgrams: "+arrayNgrams);
 
+  
+
   // Create buffer Document Object for storing only the collision data
   //var bufDoc = new DocumentClass(name);
+
+  doc.state = DocState.PROCESSING;
+  redraw();
 
   //generate MD5 Checksums of ngrams
   for(var i = 0; i < arrayNgrams.length; i++){
@@ -151,7 +159,7 @@ function analyzeText(doc){
   //store buffer object into Document Array
   //docArray.push(bufDoc);
   console.log("File processed "+doc.name);
-  doc.state = 2; //processed
+  doc.state = DocState.PROCESSED; //processed
   redraw();
 }
 

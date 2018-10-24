@@ -1,9 +1,19 @@
 TODO
 ====
 
+- problema de extracció amb els odts (tarda molt)
 - filtrar documents per extensió (invalids, no procesar)
-- meter filearray en docArray (variable file)
-- mostrar documentos subiendo o procesando...
+
+- mostrar porcentajes de documentos subiendo o procesando...
 - no mostrar datos significativos hasta que todos esten procesados
 - usar tika/form o tika/form/main ??
-- sanitize text
+- sanitize text better
+
+
+FALTA
+=====
+
+- Visualitzador del texte
+- Vista en Detall de info del arxiu
+- Vista en Detall de Relacions de colisions
+- Drop Folders
