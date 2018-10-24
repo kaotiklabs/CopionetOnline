@@ -12,7 +12,6 @@ function preload() {
 }
 
 function windowResized() {
-  //resizeCanvas(windowWidth, windowHeight);
   resizeCanvas(windowWidth, windowHeight);
 }
 
@@ -21,7 +20,7 @@ function setup() {
   //var cnv = createCanvas(windowWidth, windowHeight);
   var cnv = createCanvas(windowWidth, windowHeight);
   cnv.parent('sketchholder');
-  cnv.style('display', 'block');
+  // cnv.style('display', 'block');
   
   //load custom font  
   textFont(myFont);
@@ -67,8 +66,10 @@ function drawResultRow(i, bgX, bgY){
     fill(255);
     textAlign(CENTER, CENTER);  
     text(colChunks+"/"+totalChunks, (windowWidth*3/4)-40, rowY+rowHeight/2);
-    console.log(docName+" Local ColDict: ");
-    console.log(docArray[i].collisionDict);
+    
+    // console.log(docName+" Local ColDict: ");
+    // console.log(docArray[i].collisionDict);
+
   }else{
     //local percentage
  
@@ -92,6 +93,9 @@ function drawResultRow(i, bgX, bgY){
 function draw() {
   background(255);
 
+  console.log("draw time: "+millis());
+  checkScroll();
+
   textSize(36);
   noStroke();  
 
@@ -99,7 +103,6 @@ function draw() {
   textAlign(LEFT, TOP);
   text("COPIONET -   Online Document Fraud Detector", 90, 35);  
   image(icon, 20, 20, 60, 60);
-  
 
   if(docArray.length){
     textAlign(LEFT);    
@@ -114,9 +117,9 @@ function draw() {
       drawResultRow(i, bgX, bgY);      
     }
 
-    drawHTML();
+    // drawHTML();
     
-  //IF EMPTY, DROP SCREEN
+  //IF EMPTY, SHOW INITIAL DROP SCREEN
   }else{
     strokeWeight(5);
     stroke(200); 
@@ -127,17 +130,23 @@ function draw() {
     strokeWeight(1);
     stroke(50);
     fill(100); 
-    text('Drop a File or Folder.', width/2, height/2);    
+    text('Drop files here', width/2, height/2);    
     noLoop();    
   }
  
 }
 
-function drawHTML(){
-    
-  document.getElementById("myText").innerHTML = docArray[0].name;
-  document.getElementById("myText").append = docArray[0].type;
-  document.getElementById("myText").append = docArray[0].size;
+//adjust the scroll and canvas height if needed
+function checkScroll(){
+
+  var neededHeight = docArray.length*80+30;
+  if(neededHeight > windowHeight){
+   
+   console.log("Scaling canvas");
+   resizeCanvas(windowWidth, neededHeight, true);
+   windowHeight = neededHeight;
+   //rect(bgX, bgY, windowWidth-40, neededHeight-110);
+ } 
 
 }
 
@@ -145,12 +154,8 @@ function drawBar(x, y, w, h, numTotal, numCol){
 
   var wcol = numCol*100/numTotal;
 
-  //fill(0, 200, 0, 100);
   fill('#222F3E');
   rect(x, y, w, h);
-
-  //fill(200, 0, 0, 200);
-  //fill('#E43F05');
 
   if(wcol <= 50){
     fill('#0D69B8');
@@ -163,5 +168,13 @@ function drawBar(x, y, w, h, numTotal, numCol){
   }
   rect(x, y, wcol*w/100, h);
 
-
 }
+
+
+// function drawHTML(){
+    
+//   document.getElementById("myText").innerHTML = docArray[0].name;
+//   document.getElementById("myText").append = docArray[0].type;
+//   document.getElementById("myText").append = docArray[0].size;
+
+// }

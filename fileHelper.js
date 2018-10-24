@@ -53,7 +53,7 @@ function extractRawText(doc){
         console.log("rawText: "+data); 
         doc.rawText = data;    
         doc.state = 1; //uploaded  
-        redraw();
+        //redraw();
         analyzeText(doc); 
       }
     });
