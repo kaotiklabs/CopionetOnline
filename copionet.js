@@ -19,7 +19,6 @@ function windowResized() {
 
 function setup() {
   // create canvas
-  //var cnv = createCanvas(windowWidth, windowHeight);
   var cnv = createCanvas(windowWidth, windowHeight);
   cnv.parent('sketchholder');
   // cnv.style('display', 'block');
@@ -29,6 +28,7 @@ function setup() {
 
   // Add an event for when a file is dropped onto the canvas
   cnv.drop(gotFile);
+
 }
 
 function drawResultRow(i, bgX, bgY){
@@ -102,16 +102,16 @@ function draw() {
   checkScroll();
 
   textSize(36);
-  noStroke();  
+   noStroke();  
 
-  fill('#E6001D');
-  textAlign(LEFT, TOP);
-  text("COPIONET -   Online Document Fraud Detector", 90, 35);  
-  image(icon, 20, 20, 60, 60);
-  textSize(14);
-  fill(0);
-  text("ver 0.2", 230, 70);  
-  textSize(36);
+  // fill('#E6001D');
+  // textAlign(LEFT, TOP);
+  // text("COPIONET -   Online Document Fraud Detector", 90, 35);  
+  // image(icon, 20, 20, 60, 60);
+  // textSize(14);
+  // fill(0);
+  // text("ver 0.3", 230, 70);  
+  // textSize(36);
 
 
   if(docArray.length){
@@ -127,7 +127,7 @@ function draw() {
       drawResultRow(i, bgX, bgY);      
     }
 
-    // drawHTML();
+     drawHTML();
     
   //IF EMPTY, SHOW INITIAL DROP SCREEN
   }else{
@@ -181,10 +181,9 @@ function drawBar(x, y, w, h, numTotal, numCol){
 }
 
 
-// function drawHTML(){
+ function drawHTML(){
     
-//   document.getElementById("myText").innerHTML = docArray[0].name;
-//   document.getElementById("myText").append = docArray[0].type;
-//   document.getElementById("myText").append = docArray[0].size;
+   document.getElementById("fileName").innerHTML = docArray[0].name;
+   document.getElementById("fileText").innerHTML = docArray[0].cleanText;
 
-// }
+ }

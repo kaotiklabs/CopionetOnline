@@ -35,6 +35,7 @@ function addFile(file){
 function extractRawText(doc){
 
   //var url = 'http://givemetext.okfnlabs.org/tika/tika/form';
+  //var url = 'http://54.37.66.60:9998/tika/form';
   var url = 'http://localhost:9998/tika/form';
 
   var formData = new FormData();
