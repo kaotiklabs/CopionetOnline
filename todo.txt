@@ -1,19 +1,69 @@
-TODO
-====
-
-- problema de extracció amb els odts (tarda molt)
-- filtrar documents per extensió (invalids, no procesar)
-
-- mostrar porcentajes de documentos subiendo o procesando...
-- no mostrar datos significativos hasta que todos esten procesados
-- usar tika/form o tika/form/main ??
-- sanitize text better
-
-
-FALTA
+FER JA
 =====
 
-- Visualitzador del texte
-- Vista en Detall de info del arxiu
-- Vista en Detall de Relacions de colisions
-- Drop Folders
+- ordenar defaultview loop per percentatge
+- posar mapa relacions en defaultview
+
+- treure tots els arrays de datos del doc local i treballar exclusivament amb els locals.
+- posar un array local amb els hashes marcant només si son Unique, Collision, Template
+
+-falta decidir si es guarda també el template en local
+- falta netejar i vore lo que sobra o esta recalculat, optimitza
+
+BUGS 
+==========
+- apareixen en table collsion hashes sense partner a 0%
+
+TODO
+=====
+- bateria de proves
+- botó per fer reset data
+- text area bonica en highlight
+- comparativa?
+- definir web de entrada
+- arreglar CORS
+- arreglar docker tika CORS (no agafa el command --cors)
+
+POSIBLE MILLORES
+========
+- revisar si la forma de omplir el radar graph es cutre, també el top partners 
+    (lio amb objecte i array per fer sort) 
+    trobar una forma neta de ferho i unificarho
+- revisar si pulir variables innecesaries (doc) de loop de taula collisions details view
+- recalcular el maxim de coses desde pur javascript, abans de vuejs
+- triar una bona estructura de dades més optima (mapa??)
+- pasar a model restful api amb node.js
+
+DECISIONS DE DISENY
+===================
+- per conveni, no es pot repetir partner en una collisió!
+- la collisió es template si esta en >75% de partners
+
+FET
+=====
+-fer grafo de relacions real
+- order table partner network per numCollisions
+- posar el template calculat en valor
+- falta posar en details el template
+-  comprobar bé si tots els docs han sigut procesat antes de fer el templating, solucionat amb ajaxstop
+- calcular el partnership quant tots els doc estiguen procesats
+- fer llista o array independent de template
+- fix barra details
+- calcular percentatge de collisions amb la resta de docs
+- fer radar chart
+- arreglar hmtl taula colisions
+- trobar templates de texte (enunciat, texte comú del profe) i eliminar dels calculs
+- estudi de patrons
+- arreglat inserció de partners en global collision dict
+- grafiques
+- refactoring de detailsview
+- definir i acabar collisionPartner i collisionRelationship
+- collisionRelationship utilitzant el global coll dict
+- integrat VueX
+- fer pagina doc details
+- single app
+(estic fentho sense webpack, es una mica enrevesat)
+- enllaç logo porta a home
+- No usar single storage per passar dades
+- montar single web app en vue o angular
+

@@ -1,115 +1,64 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-
-    <meta charset="utf-8">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+<head>
+    <meta charset="UTF-8">
+    <title>COPIONET v1.3</title>
     <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
-    <style> body {padding: 0; margin: 0;} </style>
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <title>COPIONET - The Free Document Fraud Detector</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <script src="vendor/jquery/jquery.min.js"></script>
-    
-    <!-- Custom fonts for this template -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-
-    <!-- Plugin CSS -->
-    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
-
-    <!-- Custom styles for this template -->
-   <link href="css/freelancer.min.css" rel="stylesheet"> 
+    <!-- JAVASCRIPT -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js'></script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="https://unpkg.com/vuex/dist/vuex.js"></script>
 
 
-    <!-- Plugin JavaScript -->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-
-  </head>
-
-  <body>
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
-      <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">COPIONET</a>
-
-        <small>Online Document Fraud Detector</small>
-
-        <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button"
-          data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-          aria-label="Toggle navigation">
-          Menu
-          <i class="fa fa-bars"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#sketch">Sketch</a>
-            </li>
-            <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#features">Features</a>
-            </li>
-            <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#screenshots">Screenshots</a>
-            </li>
-            <li class="nav-item mx-0 mx-lg-1">
-              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#downloads">Downloads</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
 
 
-    <section class="sketch" id="sketch">
-        
-        <p>File Name: <span id="fileName"></span></p>
-        <p>File Text: <span id="fileText"></span></p>
-
-        <div id="sketchholder">
-          <!-- Our sketch will go here! -->          
-        </div>
-
-    </section>
+    <!-- CSS -->
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css'>
+    <link rel="stylesheet" href="./style.css">
 
 
-    <!-- Features Section -->
-    <section class="portfolio" id="features">
-        <div class="container">
-          <h2 class="text-center text-uppercase text-black">Features</h2>
-          <hr class="star-dark mb-5">
-          <div class="row">
-            <div class="col-lg-4 ml-auto">
-                
-                <p class="lead"><i class="fa fa-file-text-o mr-4"></i>It's simple! Just drag & drop any related doc files or folders & it will check for <b>plagiarism signs</b>.</p> <p class="lead"><i class="fa fa-file-word-o mr-4"></i>Support the main document file types: DOCX, ODT, TXT, PDF and much more!</p>
+
+</head>
+
+<body>
+    <div id="app">
+
+        <nav class="navbar navbar-dark sticky-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="#" class="navbar-left"><img style="max-width:64px;" src="img/copionet.png"></a>
+                    <a class="navbar-brand" href="/">
+                        <p class="lead">COPIONET v1.3</p>
+                    </a>
+                </div>
             </div>
-            <div class="col-lg-4 mr-auto">
-                <p class="lead"><i class="fa fa-bar-chart mr-4"></i>Uses state of the art data manipulation techniques for <b>fraud detection</b> on written texts. <p class="lead"><i class="fa fa-files-o mr-4"></i>Documents will be compared looking for coincidences.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-          
-  <!-- P5js  JavaScript -->
-  <script src="./libs/p5.min.js"></script>
-  <script src="./addons/p5.dom.min.js"></script>
+        </nav>
 
-  <script src="copionet.js"></script>
-  <script src="filehelper.js"></script>    
-  <script src="texthelper.js"></script>  
-  <script src="documentClass.js"></script>  
 
-  </body>
+        <!-- route outlet -->
+        <!-- VUE component matched by the route will render here -->
+        <router-view></router-view>
 
-</html>
+    </div>
+
+</body>
+
+<!-- vue files  -->
+<script src="./defaultView.js"></script>
+<script src="./detailsView.js"></script>
+<script src="./main.js"></script>
+
+<!-- core javascript classes  -->
+<script src="./documentClass.js"></script>
+<script src="./textutils.js"></script>
+<script src="./filehelper.js"></script>
+<script src="./dragdrop.js"></script></html>
