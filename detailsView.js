@@ -46,6 +46,14 @@ const DetailsView = {
         </div>
     </div>
 
+    <!---
+    <div class="row">
+        <div class="col-sm-12" v-for="(value, index) in getSortedKeys(getCurrentDocument().collRelations).slice(0, 5)">                              
+                {{getCurrentDocument().name | firstWord}},{{value | firstWord}},{{getPartnerPercent(getCurrentDocument().collRelations[value])}}
+        </div>                                    
+    </div>
+    -->
+
     <div class="row">
         <div class="card card-body">
             <div class="row">
@@ -361,6 +369,9 @@ const DetailsView = {
         subStr: function (string) {
             return string.substring(0, 20) + "...";
         },
+        firstWord: function (string) {
+            return string.split(' ')[0];
+        }
     },
 };
 
