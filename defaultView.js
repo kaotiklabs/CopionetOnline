@@ -1,5 +1,5 @@
 const DefaultView = {
-    template: `
+  template: `
   
   <div class="container">
 
@@ -58,72 +58,76 @@ const DefaultView = {
   </div>
   </div>
   `,
-    mounted() {
+  mounted() {},
 
+  methods: {
+    numUniqueChunks(item) {
+      return Object.keys(item.uniqueDict).length;
     },
-
-    methods: {
-        numUniqueChunks(item) {
-            return Object.keys(item.uniqueDict).length;
-        },
-        numTemplateChunks(item) {
-          return Object.keys(item.templateDict).length;
-      },         
-        numColChunks(item) {
-            return Object.keys(item.collisionDict).length;
-        },
-        numTotalChunks(item) {
-            return this.numUniqueChunks(item) + this.numTemplateChunks(item) + this.numColChunks(item);
-        },
-        plagPercent(item) {
-            var plagPercent = parseInt(this.numColChunks(item) * 100 / (this.numTotalChunks(item) - this.numTemplateChunks(item)));
-            plagPercent = plagPercent || 0
-            return plagPercent
-        },
-        getColor(item) {
-            var percent = this.plagPercent(item);
-
-            if (percent < 50) {
-                return '#147FFB';
-            } else if (percent < 80) {
-                return '#FECD51';
-            } else if (percent >= 80) {
-                return '#DA3748';
-            }
-            return '';
-        },
-        getStateIcon(item) {
-            var state = item.state;
-
-            if (state == 0) {
-                return 'cloud_queue';
-            } else if (state == 1) {
-                return 'cloud_upload';
-              } else if (state == 2) {
-                return 'build';
-            } else if (state == 3) {
-                return 'content_cut';
-            } else if (state == 4) {
-                return 'line_style';
-            } else if (state == 5) {
-                return 'file_copy';
-            } else if (state == 6) {
-              return 'pattern';
-            }else if (state == 7) {
-              return 'cloud_done';
-            }else if (state == 8) {
-              return 'error';            
-          }
-            return '';
-        }
+    numTemplateChunks(item) {
+      return Object.keys(item.templateDict).length;
     },
-    filters: {
+    numColChunks(item) {
+      return Object.keys(item.collisionDict).length;
+    },
+    numTotalChunks(item) {
+      return (
+        this.numUniqueChunks(item) +
+        this.numTemplateChunks(item) +
+        this.numColChunks(item)
+      );
+    },
+    plagPercent(item) {
+      var plagPercent = parseInt(
+        (this.numColChunks(item) * 100) /
+          (this.numTotalChunks(item) - this.numTemplateChunks(item))
+      );
+      plagPercent = plagPercent || 0;
+      return plagPercent;
+    },
+    getColor(item) {
+      var percent = this.plagPercent(item);
 
-        trim: function (string) {
-            return string.trim();
-        },
-        subStr: function (string) {
-            return string.substring(0, 20) + '...';
-        }
-    }
+      if (percent < 50) {
+        return "#147FFB";
+      } else if (percent < 80) {
+        return "#FECD51";
+      } else if (percent >= 80) {
+        return "#DA3748";
+      }
+      return "";
+    },
+    getStateIcon(item) {
+      var state = item.state;
+
+      if (state == 0) {
+        return "cloud_queue";
+      } else if (state == 1) {
+        return "cloud_upload";
+      } else if (state == 2) {
+        return "build";
+      } else if (state == 3) {
+        return "content_cut";
+      } else if (state == 4) {
+        return "line_style";
+      } else if (state == 5) {
+        return "file_copy";
+      } else if (state == 6) {
+        return "pattern";
+      } else if (state == 7) {
+        return "cloud_done";
+      } else if (state == 8) {
+        return "error";
+      }
+      return "";
+    },
+  },
+  filters: {
+    trim: function (string) {
+      return string.trim();
+    },
+    subStr: function (string) {
+      return string.substring(0, 20) + "...";
+    },
+  },
 };

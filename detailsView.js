@@ -1,5 +1,5 @@
 const DetailsView = {
-    template: `
+  template: `
   <div class="container">
 
     <div class="row">
@@ -180,209 +180,224 @@ const DetailsView = {
     </div>
     
   </div>`,
-    mounted() {
-        this.createChart("collPie", this.pieData);
-        this.createChart("collRadar", this.radarData);
-    },   
-    data() {
-        return {
-            pieData: this.getPieData(),
-            radarData: this.getRadarData(),
-        };
-    }, 
-    methods: {    
-        getSortedKeys(obj) {
-            var keys = keys = Object.keys(obj);
-            return keys.sort(function(a,b){return obj[b]-obj[a]});
-        },           
-        createChart(chartId, chartData) {
-            const ctx = document.getElementById(chartId);
-            const myChart = new Chart(ctx, {
-                type: chartData.type,
-                data: chartData.data,
-                options: chartData.options,
-            });
-        },
-        getSortbyValue(obj){
-            var entries = Object.entries(obj);
+  mounted() {
+    this.createChart("collPie", this.pieData);
+    this.createChart("collRadar", this.radarData);
+  },
+  data() {
+    return {
+      pieData: this.getPieData(),
+      radarData: this.getRadarData(),
+    };
+  },
+  methods: {
+    getSortedKeys(obj) {
+      var keys = (keys = Object.keys(obj));
+      return keys.sort(function (a, b) {
+        return obj[b] - obj[a];
+      });
+    },
+    createChart(chartId, chartData) {
+      const ctx = document.getElementById(chartId);
+      const myChart = new Chart(ctx, {
+        type: chartData.type,
+        data: chartData.data,
+        options: chartData.options,
+      });
+    },
+    getSortbyValue(obj) {
+      var entries = Object.entries(obj);
 
-            return entries.sort(function (a, b) {
-                return b[1] - a[1];
-              });
-        },      
-        getRadarData() {
-                        
-            var array = this.getSortbyValue(this.getCurrentDocument().collRelations);
-            array = array.slice(0,5);
+      return entries.sort(function (a, b) {
+        return b[1] - a[1];
+      });
+    },
+    getRadarData() {
+      var array = this.getSortbyValue(this.getCurrentDocument().collRelations);
+      array = array.slice(0, 5);
 
-            //split array by column
-            var bufLabelArray = array.map(function(row) {return row[0].substring(0,10);});
-            var bufDataArray = array.map((row) => {return row[1]*100 / this.numColChunks();});
+      //split array by column
+      var bufLabelArray = array.map(function (row) {
+        return row[0].substring(0, 10);
+      });
+      var bufDataArray = array.map((row) => {
+        return (row[1] * 100) / this.numColChunks();
+      });
 
-            var ret = {
-                type: "radar",
-                data: {
-                    labels: bufLabelArray,
-                    datasets: [
-                        {
-                            label: "Data One",
-                            data: bufDataArray,
-                            backgroundColor: [
-                                "rgba(216,57,76,0.6)", // red
-                            ],
-                            borderWidth: 3,
+      var ret = {
+        type: "radar",
+        data: {
+          labels: bufLabelArray,
+          datasets: [
+            {
+              label: "Data One",
+              data: bufDataArray,
+              backgroundColor: [
+                "rgba(216,57,76,0.6)", // red
+              ],
+              borderWidth: 3,
             },
           ],
-                },
-                options: {
-                    legend: {
-                        display: false
-                    },
-                    scale: {           
-                        ticks: {  
-                            min: 0,       
-                            max: 100,
-                        }
-                    }
-                },
-            };
+        },
+        options: {
+          legend: {
+            display: false,
+          },
+          scale: {
+            ticks: {
+              min: 0,
+              max: 100,
+            },
+          },
+        },
+      };
 
-            return ret;
-        },
-        getPieData() {
-            var bufArray = [];
-            bufArray.push(this.numUniqueChunks());
-            //bufArray.push(0);
-            bufArray.push(this.numColChunks());
-
-
-            var ret = {
-                type: "doughnut",
-                data: {
-                    //labels: ['Unique', 'Template', 'Collision'],
-                    datasets: [
-                        {
-                            label: "Data One",
-                            data: bufArray,
-                            backgroundColor: 
-                            [
-                                "rgba(32,121,248,0.8)", // blue
-                                //"rgba(48,166,64,0.8)", // green
-                                "rgba(216,57,76,0.8)", // red
-                            ],
-                            borderWidth: 3,
-                        },
-                    ],
-                },
-                options: {},
-            };
-
-            return ret;
-        },
-        getRouteId() {
-            return this.$route.params.id;
-        },
-        getCurrentDocument() {
-            return this.$store.state.documents[this.getRouteId()];
-        },
-        getCurrentDocName() {
-            return this.$store.state.documents[this.getRouteId()].name;
-        },
-        getPartnersNumber(doc, hash) {
-            var filteredArray = this.$store.state.collisions[hash].filter(function (e) {
-                return e !== doc.name;
-            });
-            return Object.keys(filteredArray.slice(1)).length;
-        },
-        getPartners(doc, hash) {
-            var filteredArray = this.$store.state.collisions[hash].filter(function (e) {
-                return e !== doc.name;
-            });
-            return filteredArray.slice(1);
-        },
-        getPartnerPercent(value) {
-            return parseInt((value * 100) / this.numColChunks());
-        },
-        getChunkCollPercent(doc, hash) {
-            return parseInt((this.getPartnersNumber(doc, hash) * 100) / Object.keys(this.$store.state.documents).length);
-        },
-        numUniqueChunks() {
-            var currentDoc = this.getCurrentDocument();
-            return Object.keys(currentDoc.uniqueDict).length;
-        },
-        numColChunks() {
-            var currentDoc = this.getCurrentDocument();
-            return Object.keys(currentDoc.collisionDict).length;
-        },
-        numTemplateChunks() {
-            var currentDoc = this.getCurrentDocument();
-            return Object.keys(currentDoc.templateDict).length;
-        },        
-        numTotalChunks() {
-            return this.numUniqueChunks() + this.numTemplateChunks() + this.numColChunks();
-        },
-        plagPercent() {
-            return parseInt(this.numColChunks() * 100 / (this.numTotalChunks() - this.numTemplateChunks()));
-        },
-        getDocCollPercent() {
-            return parseInt((this.numColChunks() * 100) / this.numTotalChunks());
-        },
-        getDocUniquePercent() {
-            return parseInt((this.numUniqueChunks() * 100) / this.numTotalChunks());
-        },
-        getDocTemplatePercent() {
-            return parseInt((this.numTemplateChunks() * 100) / this.numTotalChunks());
-        },        
-        getCollColor() {
-            var percent = this.getDocCollPercent();
-
-            if (percent < 50) {
-                return "#147FFB";
-            } else if (percent < 80) {
-                return "#FECD51";
-            } else if (percent >= 80) {
-                return "#DA3748";
-            }
-            return "";
-        },
-        getStateIcon() {
-            var currentDoc = this.getCurrentDocument();
-
-            if (currentDoc.state == 0) {
-                return "cloud_queue";
-            } else if (currentDoc.state == 1) {
-                return "cloud_upload";
-            } else if (currentDoc.state == 2) {
-                return "cloud";
-            } else if (currentDoc.state == 3) {
-                return "cloud_download";
-            } else if (doc.state == 4) {
-                return "cloud_done";
-            }
-            return "";
-        },
+      return ret;
     },
-    filters: {
-        trim: function (string) {
-            return string.trim();
+    getPieData() {
+      var bufArray = [];
+      bufArray.push(this.numUniqueChunks());
+      //bufArray.push(0);
+      bufArray.push(this.numColChunks());
+
+      var ret = {
+        type: "doughnut",
+        data: {
+          //labels: ['Unique', 'Template', 'Collision'],
+          datasets: [
+            {
+              label: "Data One",
+              data: bufArray,
+              backgroundColor: [
+                "rgba(32,121,248,0.8)", // blue
+                //"rgba(48,166,64,0.8)", // green
+                "rgba(216,57,76,0.8)", // red
+              ],
+              borderWidth: 3,
+            },
+          ],
         },
-        subStr: function (string) {
-            return string.substring(0, 20) + "...";
-        },
-        firstWord: function (string) {
-            return string.split(' ')[0];
-        }
+        options: {},
+      };
+
+      return ret;
     },
+    getRouteId() {
+      return this.$route.params.id;
+    },
+    getCurrentDocument() {
+      return this.$store.state.documents[this.getRouteId()];
+    },
+    getCurrentDocName() {
+      return this.$store.state.documents[this.getRouteId()].name;
+    },
+    getPartnersNumber(doc, hash) {
+      var filteredArray = this.$store.state.collisions[hash].filter(function (
+        e
+      ) {
+        return e !== doc.name;
+      });
+      return Object.keys(filteredArray.slice(1)).length;
+    },
+    getPartners(doc, hash) {
+      var filteredArray = this.$store.state.collisions[hash].filter(function (
+        e
+      ) {
+        return e !== doc.name;
+      });
+      return filteredArray.slice(1);
+    },
+    getPartnerPercent(value) {
+      return parseInt((value * 100) / this.numColChunks());
+    },
+    getChunkCollPercent(doc, hash) {
+      return parseInt(
+        (this.getPartnersNumber(doc, hash) * 100) /
+          Object.keys(this.$store.state.documents).length
+      );
+    },
+    numUniqueChunks() {
+      var currentDoc = this.getCurrentDocument();
+      return Object.keys(currentDoc.uniqueDict).length;
+    },
+    numColChunks() {
+      var currentDoc = this.getCurrentDocument();
+      return Object.keys(currentDoc.collisionDict).length;
+    },
+    numTemplateChunks() {
+      var currentDoc = this.getCurrentDocument();
+      return Object.keys(currentDoc.templateDict).length;
+    },
+    numTotalChunks() {
+      return (
+        this.numUniqueChunks() + this.numTemplateChunks() + this.numColChunks()
+      );
+    },
+    plagPercent() {
+      return parseInt(
+        (this.numColChunks() * 100) /
+          (this.numTotalChunks() - this.numTemplateChunks())
+      );
+    },
+    getDocCollPercent() {
+      return parseInt((this.numColChunks() * 100) / this.numTotalChunks());
+    },
+    getDocUniquePercent() {
+      return parseInt((this.numUniqueChunks() * 100) / this.numTotalChunks());
+    },
+    getDocTemplatePercent() {
+      return parseInt((this.numTemplateChunks() * 100) / this.numTotalChunks());
+    },
+    getCollColor() {
+      var percent = this.getDocCollPercent();
+
+      if (percent < 50) {
+        return "#147FFB";
+      } else if (percent < 80) {
+        return "#FECD51";
+      } else if (percent >= 80) {
+        return "#DA3748";
+      }
+      return "";
+    },
+    getStateIcon() {
+      var currentDoc = this.getCurrentDocument();
+
+      if (currentDoc.state == 0) {
+        return "cloud_queue";
+      } else if (currentDoc.state == 1) {
+        return "cloud_upload";
+      } else if (currentDoc.state == 2) {
+        return "cloud";
+      } else if (currentDoc.state == 3) {
+        return "cloud_download";
+      } else if (doc.state == 4) {
+        return "cloud_done";
+      }
+      return "";
+    },
+  },
+  filters: {
+    trim: function (string) {
+      return string.trim();
+    },
+    subStr: function (string) {
+      return string.substring(0, 20) + "...";
+    },
+    firstWord: function (string) {
+      return string.split(" ")[0];
+    },
+  },
 };
 
 const collChartData = {
-    type: "doughnut",
-    data: {
-        datasets: [
-            {
-                // one line graph
+  type: "doughnut",
+  data: {
+    datasets: [
+      {
+        // one line graph
       },
     ],
-    },
-    options: {},
+  },
+  options: {},
 };

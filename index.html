@@ -1,64 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>COPIONET v1.3</title>
-    <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+    <meta
+      name="viewport"
+      width="device-width,"
+      initial-scale="1.0,"
+      maximum-scale="1.0,"
+      user-scalable="0"
+    />
 
     <!-- JAVASCRIPT -->
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <script src="https://unpkg.com/vuex/dist/vuex.js"></script>
 
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
     <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
 
-
     <!-- CSS -->
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css'>
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css'>
-    <link rel="stylesheet" href="./style.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
 
-
-
-</head>
-
-<body>
+  <body>
     <div id="app">
+      <nav class="navbar navbar-dark sticky-top">
+        <div class="container">
+          <div class="navbar-header">
+            <a href="#" class="navbar-left"
+              ><img style="max-width: 64px" src="img/copionet.png"
+            /></a>
+            <a class="navbar-brand" href="/">
+              <p class="lead">COPIONET v1.3</p>
+            </a>
+          </div>
+        </div>
+      </nav>
 
-        <nav class="navbar navbar-dark sticky-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <a href="#" class="navbar-left"><img style="max-width:64px;" src="img/copionet.png"></a>
-                    <a class="navbar-brand" href="/">
-                        <p class="lead">COPIONET v1.3</p>
-                    </a>
-                </div>
-            </div>
-        </nav>
-
-
-        <!-- route outlet -->
-        <!-- VUE component matched by the route will render here -->
-        <router-view></router-view>
-
+      <!-- route outlet -->
+      <!-- VUE component matched by the route will render here -->
+      <router-view></router-view>
     </div>
+  </body>
 
-</body>
+  <!-- vue files  -->
+  <script src="./defaultView.js"></script>
+  <script src="./detailsView.js"></script>
+  <script src="./main.js"></script>
 
-<!-- vue files  -->
-<script src="./defaultView.js"></script>
-<script src="./detailsView.js"></script>
-<script src="./main.js"></script>
-
-<!-- core javascript classes  -->
-<script src="./documentClass.js"></script>
-<script src="./textutils.js"></script>
-<script src="./filehelper.js"></script>
-<script src="./dragdrop.js"></script></html>
+  <!-- core javascript classes  -->
+  <script src="./documentClass.js"></script>
+  <script src="./textutils.js"></script>
+  <script src="./filehelper.js"></script>
+  <script src="./dragdrop.js"></script>
+</html>
